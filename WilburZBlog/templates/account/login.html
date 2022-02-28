@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+    <h1>Login</h1>
+    <p>Input your username and password</p>
+    <form class="form-horizontal" action="." method="post">{% csrf_token %}
+        <!-- action="."用于显示当前表单的提交地址，这里表示的是当前地址，即调用此模板的视图函数所对应的URL -->
+        <!-- {{ form.as_p }} -->
+        <!-- form.as_p form表单实例对象化，将以<p>文本渲染至模板</p> -->
+        <!-- for="{{ form.username.id_for_label }}"for的含义：是把标签和表单元素绑定；效果是点击标签时，可以触发表单控件。
+         双括号里面是django的变量，也就是username的id 通常效果：比如输入用户名，当你点击“用户名”时，光标自动就定位到“用户名”后面的输入框，
+         不需要把鼠标精确挪到输入框。-->
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}" class="col-md-5 control-label" style="color:red">
+                <span class="glyphicon glyphicon-user"></span>Username</label>
+            <div class="col-md-6 text-left">{{ form.username }}</div>
+        </div>
+        <div class="form-group">
+            <label for="{{ form.password.id_for_label }}" class="col-md-5 control-label" style="color:blue">
+                <span class="glyphicon glyphicon-floppy-open"></span>Password</label>
+            <div class="col-md-6 text-left">{{ form.password }}</div>
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg" value="login">
+    </form>
+</div>
+{% endblock %}
